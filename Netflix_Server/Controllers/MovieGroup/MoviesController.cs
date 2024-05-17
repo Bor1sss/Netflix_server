@@ -14,10 +14,11 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 public class MoviesController : ControllerBase
 {
     private readonly IMovieRepository _movieRep;
-
-    public MoviesController(MovieContext context, IMapper mapper, IMovieRepository movieRepository)
+    IWebHostEnvironment _appEnvironment;
+    public MoviesController(MovieContext context, IMapper mapper, IMovieRepository movieRepository, IWebHostEnvironment appEnvironment)
     {
         _movieRep = movieRepository;
+        _appEnvironment = appEnvironment;
     }
 
     [HttpPost]
@@ -60,6 +61,38 @@ public class MoviesController : ControllerBase
         var updatedMovie = await _movieRep.UpdateMovie(movieDto);
 
         return updatedMovie == null ? BadRequest() : Ok(updatedMovie);
+    }
+
+    [HttpPost("/film")]
+    public async Task<IActionResult> UploadChunk([FromForm] IFormFile file, [FromForm] int chunkNumber, [FromForm] int totalChunks)
+    {
+        if (file == null || file.Length == 0)
+        {
+            return BadRequest("No file uploaded.");
+        }
+
+        var uploadPath = Path.Combine(_appEnvironment.WebRootPath, "uploads");
+        if (!Directory.Exists(uploadPath))
+        {
+            Directory.CreateDirectory(uploadPath);
+        }
+
+        var tempFilePath = Path.Combine(uploadPath, file.FileName + ".tmp");
+
+        using (var stream = new FileStream(tempFilePath, FileMode.Append))
+        {
+            await file.CopyToAsync(stream);
+        }
+
+        // Check if all chunks are uploaded
+        if (chunkNumber == totalChunks - 1)
+        {
+            var finalFilePath = Path.Combine(uploadPath, file.FileName);
+            System.IO.File.Move(tempFilePath, finalFilePath);
+            return Ok(new { filePath = finalFilePath });
+        }
+
+        return Ok();
     }
 
     [HttpDelete("{id}")]
