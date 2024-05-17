@@ -13,6 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddScoped<IImageRepository, ImageRepository>();
+builder.Services.AddScoped<IActorRepository, ActorRepository>();
+
 
 
 builder.Services.AddScoped<IRepository<Feature>, FeatureRepository>();

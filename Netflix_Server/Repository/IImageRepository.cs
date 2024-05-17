@@ -9,6 +9,8 @@ namespace Netflix_Server.Repository
     {
         ICollection<Image> GetImagesFromDto(ICollection<ImageDto> images);
         Task<ICollection<Image>> SaveNewImagesFromDto(MovieDto dto);
+        Task<ICollection<Image>> SaveNewImagesFromDto(ActorDto dto);
+
     }
 
     public class ImageRepository : IImageRepository
@@ -23,6 +25,17 @@ namespace Netflix_Server.Repository
         }
 
         public async Task<ICollection<Image>> SaveNewImagesFromDto(MovieDto dto)
+        {
+            if (dto.Images == null) return new List<Image>();
+
+            var images = _mapper.Map<List<Image>>(dto.Images.Where(x => x.Id == null));
+            await _context.Images.AddRangeAsync(images);
+            await _context.SaveChangesAsync();
+
+            return images;
+        }
+
+        public async Task<ICollection<Image>> SaveNewImagesFromDto(ActorDto dto)
         {
             if (dto.Images == null) return new List<Image>();
 
