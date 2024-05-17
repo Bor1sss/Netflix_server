@@ -162,7 +162,7 @@ namespace Netflix_Server.Repository
 
             if (existingMovie == null)
             {
-                // Movie not found, return null
+                // Movie not found, return null 
                 return null;
             }
 
@@ -171,7 +171,7 @@ namespace Netflix_Server.Repository
             existingMovie.Description = dto.Description;
             existingMovie.Key = dto.Key;
             existingMovie.StarRating = dto.StarRating;
-            existingMovie.ReleaseDate = DateTime.Parse(dto.ReleaseDate);
+            existingMovie.ReleaseDate = DateOnly.Parse(dto.ReleaseDate);
             existingMovie.Runtime = dto.Runtime;
 
             // Update genres

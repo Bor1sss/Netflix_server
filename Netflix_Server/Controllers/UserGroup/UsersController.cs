@@ -152,7 +152,7 @@ namespace Netflix_Server.Controllers.UserGroup
                     {
                         return BadRequest(new { message = "User with this email is already registered." });
                     }
-                    
+
                 }
                 catch (Exception ex)
                 {
