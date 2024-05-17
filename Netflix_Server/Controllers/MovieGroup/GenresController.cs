@@ -56,6 +56,7 @@ public class GenresController : ControllerBase
         return Ok(_mapper.Map<GenreDto>(genre));
     }
 
+
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateGenre(int id, [FromBody] GenreDto genreDto)
     {
