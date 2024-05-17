@@ -12,7 +12,6 @@ namespace Netflix_Server.Repository
         Task<ActorDto> AddActor(ActorDto actor);
         Task<bool> RemoveActorById(int id);
         Task<ICollection<ActorDto>> GetActors();
-        Task<ICollection<ActorDto>> GetActors(FilterMovieDto filter);
         Task<ActorDto> GetActorById(int id);
         Task<ActorDto> UpdateActor(ActorDto actor);
     }
@@ -105,43 +104,8 @@ namespace Netflix_Server.Repository
         {
             var actors = await _context.Actors
                 .Include(a => a.ActorImages).ThenInclude(ai => ai.Image)
-                .Include(a => a.Movies).ThenInclude(m => m.MovieImages).ThenInclude(mi => mi.Image)
-                .Include(a => a.Movies).ThenInclude(m => m.Remark)
-                .Include(a => a.Movies).ThenInclude(m => m.Rating)
-                .Include(a => a.Movies).ThenInclude(m => m.Genres)
-                .Include(a => a.Movies).ThenInclude(m => m.Director).ThenInclude(d => d.DirectorImages).ThenInclude(di => di.Image)
-                .Include(a => a.Movies).ThenInclude(m => m.Company).ThenInclude(c => c.CompanyImages).ThenInclude(ci => ci.Image)
                 .ToListAsync();
 
-            return _mapper.Map<List<ActorDto>>(actors);
-        }
-
-
-        public async Task<ICollection<ActorDto>> GetActors(FilterMovieDto filter)
-        {
-            var query = _context.Actors
-                .Include(a => a.ActorImages).ThenInclude(ai => ai.Image)
-                .Include(a => a.Movies)
-                .AsQueryable();
-
-            if (!string.IsNullOrEmpty(filter.SearchSubstring))
-            {
-                query = query.Where(a => a.Name.ToLower().Contains(filter.SearchSubstring.ToLower()));
-            }
-
-            if (filter.GenreIds?.Any() == true)
-            {
-                query = query.Where(a => a.Movies.Any(m => m.Genres.Any(g => filter.GenreIds.Contains(g.Id))));
-            }
-
-            if (query.Count() == 0) return new List<ActorDto>();
-
-            query = query
-                .OrderBy(a => a.Id)
-                .Skip((filter.PageIndex - 1) * filter.PageSize)
-                .Take(filter.PageSize);
-
-            var actors = await query.ToListAsync();
             return _mapper.Map<List<ActorDto>>(actors);
         }
 
