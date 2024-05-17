@@ -12,7 +12,7 @@ namespace Netflix_Server.Models.Context
         public MovieContext(DbContextOptions<MovieContext> options)
             : base(options)
         {
-            //Database.EnsureDeleted();
+            //Database.EnsureDeleted(); 
             if (Database.EnsureCreated())
             {
                 List<PricingPlan> plans = new List<PricingPlan>()
