@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Netflix_Server.Models.MovieGroup;
+using Netflix_Server.Models.SupportGroup;
 using Netflix_Server.Models.UserGroup;
 using System.Reflection.Emit;
 
@@ -12,7 +13,7 @@ namespace Netflix_Server.Models.Context
         public MovieContext(DbContextOptions<MovieContext> options)
             : base(options)
         {
-            //Database.EnsureDeleted(); 
+            //Database.EnsureDeleted();
             if (Database.EnsureCreated())
             {
                 List<PricingPlan> plans = new List<PricingPlan>()
@@ -60,89 +61,139 @@ namespace Netflix_Server.Models.Context
                         }
                     }
                 };
-
                 PricingPlans.AddRange(plans);
                 SaveChanges();
 
-
-
-
-
                 List<Image> images = new List<Image>() {
-                    new Image {ImageUrl = "https://images.unsplash.com/photo-1467703834117-04386e3dadd8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", Alt = "Image 1" },
-                    new Image {ImageUrl = "https://images.unsplash.com/photo-1489447068241-b3490214e879?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", Alt = "Image 2" },
-                    new Image {ImageUrl = "https://images.unsplash.com/photo-1492315622343-a50efe7c40a3?q=80&w=2014&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", Alt = "Image 3" }
+                    // for actors 
+                    //1
+                    new Image {ImageUrl = "https://hips.hearstapps.com/hmg-prod/images/hlh100123feacover-010-1-650dd73053c63.jpg", Alt = "Chris Hemsworth"},
+                    //2
+                    new Image {ImageUrl = "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTaZlhnryd2kRyQlF-46pVxhsWAzqdydT3d0G3RJf-C41H3FU9t", Alt = "Adam Bessa"},
+                    //3
+                    new Image {ImageUrl = "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRIoTicvnmHhHcF3P2UciV9V36nBmhWPnKNti34EYHZOqzefGIo", Alt = "Golshifteh Farahani"},
+                    
+
+                    // for movies
+                    //4
+                    new Image {ImageUrl = "https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABZ6ND88pZdT9v-gbiVfmMr8vowAHFfr8ujruNpYcF3Wv3LRAZtC9MRPHiYrREQWia2AAG29hUmfPvn73DDFyhcmjDCR0N47ivOvB.jpg?r=965", Alt= "Extraction II (2023)"},
+                    //5
+                    new Image {ImageUrl = "https://images.squarespace-cdn.com/content/v1/54fc3c46e4b07795aca279b5/19c6bfb9-6128-44e9-9e71-50bcb52b2114/hou-art-20230310-ltfs-header.jpeg", Alt= "Luther: The Fallen Sun (2023)"},
+
+                    // for companies
+                    //6
+                    new Image {ImageUrl = "https://marketing.brain.com.ua/static/articles_description_ru/img_20240225182021.jpeg", Alt = "Netflix" },
+                    //7
+                    new Image {ImageUrl = "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/3/36/Sony_pictures_logo.jpg/revision/latest?cb=20190708084018&path-prefix=ru", Alt = "Sony Pictures" },
                 };
                 Images.AddRange(images);
                 SaveChanges();
 
                 List<Actor> actors = new List<Actor>() {
-                    new Actor { Name = "Actor 1" },
-                    new Actor { Name = "Actor 2" },
-                    new Actor { Name = "Actor 3" }
+                    new Actor { Name = "Chris Hemsworth" },      // 1
+                    new Actor { Name = "Adam Bessa" },           // 2
+                    new Actor { Name = "Golshifteh Farahani" },  // 3 
+
+                    new Actor { Name = "Idris Elba" },    // 4
+                    new Actor { Name = "Cynthia Erivo" }, // 5 
+                    new Actor { Name = "Andy Serkis" },   // 6 
                 };
                 Actors.AddRange(actors);
                 SaveChanges();
 
                 List<ActorImage> actorImages = new List<ActorImage>()
                 {
-                    new ActorImage {ActorId = 1, ImageId = 1},
-                    new ActorImage {ActorId = 2, ImageId = 2},
-                    new ActorImage {ActorId = 3, ImageId = 3}
+                    new ActorImage {ActorId = 1, ImageId = 1}, // 1
+                    new ActorImage {ActorId = 2, ImageId = 2}, // 2
+                    new ActorImage {ActorId = 3, ImageId = 3}, // 3
+
+                    new ActorImage {ActorId = 4, ImageId = 1}, // 4
+                    new ActorImage {ActorId = 5, ImageId = 2}, // 5
+                    new ActorImage {ActorId = 6, ImageId = 3}, // 6
                 };
                 ActorImages.AddRange(actorImages);
                 SaveChanges();
 
                 List<Company> companies = new List<Company>()
                 {
-                    new Company {Name = "Company 1" },
-                    new Company {Name = "Company 2" },
-                    new Company {Name = "Company 3" }
+                    new Company {Name = "Netflix" }, // 1
+                    new Company {Name = "Sony Pictures" }, // 2
                 };
                 Companies.AddRange(companies);
 
                 List<CompanyImage> companyImages = new List<CompanyImage>()
                 {
-                    new CompanyImage {CompanyId = 1, ImageId = 1},
-                    new CompanyImage {CompanyId = 2, ImageId = 2},
-                    new CompanyImage {CompanyId = 3, ImageId = 3}
+                    new CompanyImage {CompanyId = 1, ImageId = 1}, // 1
+                    new CompanyImage {CompanyId = 2, ImageId = 2}, // 2
                 };
                 CompanyImages.AddRange(companyImages);
 
                 List<Remark> remarks = new List<Remark>() {
-                    new Remark { Name = "Good" },
-                    new Remark { Name = "Average" },
-                    new Remark { Name = "Poor" }
+                    new Remark { Name = "Leaving Soon" },    // 1
+                    new Remark { Name = "Added Recently" },  // 2
+                    new Remark { Name = "Trending Now" },    // 3
+                    new Remark { Name = "Top Picks" },       // 4
+                    new Remark { Name = "Popular" },         // 5
+                    new Remark { Name = "New Release" },     // 6
+                    new Remark { Name = "Staff Pick" },      // 7
+                    new Remark { Name = "Award Winner" },    // 8
+                    new Remark { Name = "Classic" },         // 9
+                    new Remark { Name = "Fan Favorite" }     // 10
                 };
                 Remarks.AddRange(remarks);
                 SaveChanges();
 
                 List<Rating> ratings = new List<Rating>()
                 {
-                    new Rating {Name = "G" },
-                    new Rating {Name = "PG" },
-                    new Rating {Name = "PG-13" },
-                    new Rating {Name = "R" },
-                    new Rating {Name = "NC-17" }
+                    new Rating { Name = "G" },          //1
+                    new Rating { Name = "PG" },         //2
+                    new Rating { Name = "PG-13" },      //3
+                    new Rating { Name = "R" },          //4
+                    new Rating { Name = "NC-17" },      //5
+                    new Rating { Name = "Not Rated" },  //6
+                    new Rating { Name = "Unrated" },    //7
+                    new Rating { Name = "Approved" },   //8
+                    new Rating { Name = "Passed" },     //9
+                    new Rating { Name = "TV-G" },       //10
+                    new Rating { Name = "TV-PG" },      //11
+                    new Rating { Name = "TV-14" },      //12
+                    new Rating { Name = "TV-MA" },      //13
+                    new Rating { Name = "TV-Y" },       //14
+                    new Rating { Name = "TV-Y7" },      //15
+                    new Rating { Name = "TV-Y7-FV" }    //16
                 };
                 Ratings.AddRange(ratings);
                 SaveChanges();
 
                 List<Genre> genres = new List<Genre>()
                 {
-                    new Genre {Name = "Action" },
-                    new Genre {Name = "Comedy" },
-                    new Genre {Name = "Drama" },
-                    new Genre {Name = "Fantasy" },
-                    new Genre {Name = "Horror" }
+                    new Genre { Name = "Action" },      //1
+                    new Genre { Name = "Comedy" },      //2
+                    new Genre { Name = "Drama" },       //3
+                    new Genre { Name = "Fantasy" },     //4
+                    new Genre { Name = "Horror" },      //5
+                    new Genre { Name = "Crime" },       //6
+                    new Genre { Name = "Thriller" },    //7
+                    new Genre { Name = "Mystery" },     //8
+                    new Genre { Name = "Romance" },     //9
+                    new Genre { Name = "Sci-Fi" },      //10
+                    new Genre { Name = "Adventure" },   //11
+                    new Genre { Name = "Animation" },   //12
+                    new Genre { Name = "Biography" },   //13
+                    new Genre { Name = "Documentary" }, //14
+                    new Genre { Name = "Family" },      //15
+                    new Genre { Name = "History" },     //16
+                    new Genre { Name = "Musical" },     //17
+                    new Genre { Name = "Sport" },       //18
+                    new Genre { Name = "War" },         //19
+                    new Genre { Name = "Western" }      //20 
                 };
                 Genres.AddRange(genres);
                 SaveChanges();
 
                 List<Director> directors = new List<Director>() {
-                    new Director {Name = "Director 1"},
-                    new Director {Name = "Director 2" },
-                    new Director {Name = "Director 3" }
+                    new Director {Name = "Sam Hargrave"},   //1 
+                    new Director {Name = "Jamie Payne" },   //2 
                 };
                 Directors.AddRange(directors);
                 SaveChanges();
@@ -151,7 +202,6 @@ namespace Netflix_Server.Models.Context
                 {
                     new DirectorImage {DirectorId = 1, ImageId = 1},
                     new DirectorImage {DirectorId = 2, ImageId = 2},
-                    new DirectorImage {DirectorId = 3, ImageId = 3}
                 };
                 DirectorImages.AddRange(directorImages);
                 SaveChanges();
@@ -159,22 +209,44 @@ namespace Netflix_Server.Models.Context
 
                 List<Movie> movies = new List<Movie>()
                 {
-                    new Movie {Title = "Movie 1", Description = "Description 1", Key = "?v=bvC_0foemLY", StarRating = "5", Runtime = 120, DirectorId = 1, CompanyId = 1, RatingId = 1, RemarkId = 1 },
-                    new Movie {Title = "Movie 2", Description = "Description 2", Key = "?v=bvC_0foemLY", StarRating = "4", Runtime = 90, DirectorId = 2, CompanyId = 2, RatingId = 2, RemarkId = 2 }
+                    new Movie {Title = "Extraction II (2023)", Description = "After barely surviving his grievous wounds from his mission in Dhaka, Bangladesh, Tyler Rake is back, and his team is ready to take on their next mission.",
+                        Key = "Y274jZs5s7s", StarRating = "4", Runtime = 123, DirectorId = 1, CompanyId = 1, RatingId = 4, RemarkId = null, ReleaseDate = DateOnly.Parse("2024-06-06"),
+                        Genres = new List<Genre>(){ genres[0], genres[5], genres[6] },
+                        Actors = new List<Actor>(){ actors[0], actors[1], actors[2] },
+                    },
+                    new Movie {Title = "Luther: The Fallen Sun (2023)", Description = "Brilliant but disgraced detective John Luther breaks out of prison to hunt down a sadistic serial killer who is terrorising London.",
+                        Key = "EGK5qtXuc1Q", StarRating = "5", Runtime = 129, DirectorId = 1, CompanyId = 2, RatingId = 1, RemarkId = 1, ReleaseDate = DateOnly.Parse("2021-01-05"),
+                        Genres = new List<Genre>(){ genres[5], genres[2], genres[7] },
+                        Actors = new List<Actor>(){ actors[3], actors[4], actors[5] },
+                    },
                 };
                 Movies.AddRange(movies);
                 SaveChanges();
+
                 List<MovieImage> movieImages = new List<MovieImage>()
                 {
-                    new MovieImage {MovieId = 1, ImageId = 1},
-                    new MovieImage {MovieId = 2, ImageId = 2},
+                    new MovieImage {MovieId = 1, ImageId = 4},
+                    new MovieImage {MovieId = 2, ImageId = 5},
                 };
                 MovieImages.AddRange(movieImages);
                 SaveChanges();
 
+                List<Faq> faqs = new List<Faq>
+                {
+                    new Faq { Title ="What is Netflix?", Answer = "Netflix is a streaming service that offers a wide variety of award-winning TV shows, movies, anime, documentaries, and more on thousands of internet-connected devices. \n\nYou can watch as much as you want, whenever you want without a single commercial – all for one low monthly price. There's always something new to discover and new TV shows and movies are added every week!"},
+                    new Faq { Title ="How much does Netflix cost?", Answer = "Watch Netflix on your smartphone, tablet, Smart TV, laptop, or streaming device, all for one fixed monthly fee. Plans range from EUR 4.99 to EUR 9.99 a month. No extra costs, no contracts."},
+                    new Faq { Title ="Where can I watch?", Answer = "Watch anywhere, anytime. Sign in with your Netflix account to watch instantly on the web at netflix.com from your personal computer or on any internet-connected device that offers the Netflix app, including smart TVs, smartphones, tablets, streaming media players and game consoles. \n\nYou can also download your favorite shows with the iOS, Android, or Windows 10 app. Use downloads to watch while you're on the go and without an internet connection. Take Netflix with you anywhere."},
+                    new Faq { Title ="How do I cancel?", Answer = "Netflix is flexible. There are no pesky contracts and no commitments. You can easily cancel your account online in two clicks. There are no cancellation fees – start or stop your account anytime."},
+                    new Faq { Title ="What can I watch on Netflix?", Answer = "Netflix has an extensive library of feature films, documentaries, TV shows, anime, award-winning Netflix originals, and more. Watch as much as you want, anytime you want."},
+                    new Faq { Title ="Is Netflix good for kids?", Answer = "The Netflix Kids experience is included in your membership to give parents control while kids enjoy family-friendly TV shows and movies in their own space. \n\nKids profiles come with PIN-protected parental controls that let you restrict the maturity rating of content kids can watch and block specific titles you don’t want kids to see."},
+                    new Faq { Title ="Why am I seeing this language?", Answer = "Your browser preferences determine the language shown here."},
+                };
+                Faqs.AddRange(faqs);
+                SaveChanges();
             }
         }
 
+        public DbSet<Faq> Faqs { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<MovieImage> MovieImages { get; set; }
         public DbSet<Image> Images { get; set; }
