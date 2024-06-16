@@ -6,9 +6,7 @@
         public string Title { get; set; }
         public ICollection<ImageDto>? Images { get; set; }
         public string Description { get; set; }
-        public int RemarkId { get; set; }
-
-     
+        public int? RemarkId { get; set; }
         public RemarkDto? Remark { get; set; }
         public string Key { get; set; }
         public string StarRating { get; set; }
