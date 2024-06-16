@@ -210,12 +210,12 @@ namespace Netflix_Server.Models.Context
                 List<Movie> movies = new List<Movie>()
                 {
                     new Movie {Title = "Extraction II (2023)", Description = "After barely surviving his grievous wounds from his mission in Dhaka, Bangladesh, Tyler Rake is back, and his team is ready to take on their next mission.",
-                        Key = "Y274jZs5s7s", StarRating = "4", Runtime = 123, DirectorId = 1, CompanyId = 1, RatingId = 4, RemarkId = null, ReleaseDate = DateOnly.Parse("2024-06-06"),
+                        Key = "Y274jZs5s7s", StarRating = "4", Runtime = 123, DirectorId = 1, CompanyId = 1, RatingId = 4, RemarkId = null, ReleaseDate = DateTime.Now,
                         Genres = new List<Genre>(){ genres[0], genres[5], genres[6] },
                         Actors = new List<Actor>(){ actors[0], actors[1], actors[2] },
                     },
                     new Movie {Title = "Luther: The Fallen Sun (2023)", Description = "Brilliant but disgraced detective John Luther breaks out of prison to hunt down a sadistic serial killer who is terrorising London.",
-                        Key = "EGK5qtXuc1Q", StarRating = "5", Runtime = 129, DirectorId = 1, CompanyId = 2, RatingId = 1, RemarkId = 1, ReleaseDate = DateOnly.Parse("2021-01-05"),
+                        Key = "EGK5qtXuc1Q", StarRating = "5", Runtime = 129, DirectorId = 1, CompanyId = 2, RatingId = 1, RemarkId = 1, ReleaseDate = DateTime.Now,
                         Genres = new List<Genre>(){ genres[5], genres[2], genres[7] },
                         Actors = new List<Actor>(){ actors[3], actors[4], actors[5] },
                     },

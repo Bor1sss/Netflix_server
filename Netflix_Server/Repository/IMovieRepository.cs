@@ -171,7 +171,7 @@ namespace Netflix_Server.Repository
             existingMovie.Description = dto.Description;
             existingMovie.Key = dto.Key;
             existingMovie.StarRating = dto.StarRating;
-            existingMovie.ReleaseDate = DateOnly.Parse(dto.ReleaseDate);
+            existingMovie.ReleaseDate = DateTime.Parse(dto.ReleaseDate);
             existingMovie.Runtime = dto.Runtime;
 
             // Update genres
