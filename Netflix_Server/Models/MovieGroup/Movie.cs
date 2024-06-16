@@ -16,7 +16,7 @@ namespace Netflix_Server.Models.MovieGroup
         public string StarRating { get; set; }
         public int RatingId { get; set; }
         public virtual Rating Rating { get; set; }
-        public DateOnly? ReleaseDate { get; set; }
+        public DateTime? ReleaseDate { get; set; }
         public virtual ICollection<Genre> Genres { get; set; }
         public int Runtime { get; set; }
         public virtual ICollection<Actor> Actors { get; set; }
